@@ -17,7 +17,6 @@ public class UserAccountTests {
     @BeforeClass
     public void setup() {
         RestAssured.baseURI = "https://automationexercise.com/api";
-        // Generate unique email to avoid conflicts
         email = "user" + System.currentTimeMillis() + "@example.com";
     }
 
@@ -43,9 +42,9 @@ public class UserAccountTests {
                 .formParam("state", "California")
                 .formParam("city", "Los Angeles")
                 .formParam("mobile_number", "1234567890")
-                .when()
+            .when()
                 .post("/createAccount")
-                .then()
+            .then()
                 .log().all()
                 .statusCode(200)
                 .extract().response();
@@ -65,9 +64,9 @@ public class UserAccountTests {
                 .header("Accept", "*/*")
                 .formParam("email", email)
                 .formParam("password", password)
-                .when()
+            .when()
                 .post("/verifyLogin")
-                .then()
+            .then()
                 .log().all()
                 .statusCode(200)
                 .extract().response();
@@ -101,9 +100,9 @@ public class UserAccountTests {
                 .formParam("zipcode", "54321")
                 .formParam("state", "California")
                 .formParam("city", "Los Angeles")
-                .when()
+            .when()
                 .put("/updateAccount")
-                .then()
+            .then()
                 .log().all()
                 .statusCode(200)
                 .extract().response();
@@ -122,9 +121,9 @@ public class UserAccountTests {
                 .log().all()
                 .header("Accept", "*/*")
                 .queryParam("email", email)
-                .when()
+            .when()
                 .get("/getUserDetailByEmail")
-                .then()
+            .then()
                 .log().all()
                 .statusCode(200)
                 .extract().response();
@@ -133,7 +132,6 @@ public class UserAccountTests {
         String jsonString = bodyString.replaceAll("(?s)<.*?>", "");
         JsonPath json = new JsonPath(jsonString);
 
-        // Sada dohvatamo podatke unutar "user" objekta
         String name = json.getString("user.name");
         String lastName = json.getString("user.last_name");
         String company = json.getString("user.company");
@@ -161,9 +159,9 @@ public class UserAccountTests {
                 .header("Accept", "*/*")
                 .formParam("email", email)
                 .formParam("password", password)
-                .when()
+            .when()
                 .delete("/deleteAccount")
-                .then()
+            .then()
                 .log().all()
                 .statusCode(200)
                 .extract().response();

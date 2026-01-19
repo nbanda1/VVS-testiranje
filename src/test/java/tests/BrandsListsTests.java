@@ -15,13 +15,13 @@ public class BrandsListsTests {
         RestAssured.baseURI = "https://automationexercise.com/api";
 
         given()
-                .log().all()        // Log request details
+                .log().all()
         .when()
-                .get("/brandsList") // Send GET request
+                .get("/brandsList")
         .then()
-                .log().all()        // Log response details
-                .statusCode(200)    // Assert status code
-                .time(lessThan(3000L)) // Assert response time < 3 seconds
-                .body("brands", notNullValue()); // Assert JSON has "brands" key
+                .log().all()
+                .statusCode(200)
+                .time(lessThan(3000L))
+                .body("brands", notNullValue());
     }
 }
